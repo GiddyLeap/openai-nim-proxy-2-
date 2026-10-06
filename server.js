@@ -34,7 +34,54 @@ app.get('/health', (req, res) => {
     thinking_mode: ENABLE_THINKING_MODE
   });
 });
+app.get('/test-nvidia', async (req, res) => {
+  try {
+    const response = await axios.post(
+      `${NIM_API_BASE}/chat/completions`,
+      {
+        model: 'z-ai/glm-5-3-flash',
+        messages: [
+          {
+            role: 'user',
+            content: 'Say hello in one short sentence.'
+          }
+        ],
+        max_tokens: 50,
+        reasoning_effort: 'low',
+        stream: false
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${NIM_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
 
+    console.log('NVIDIA TEST SUCCESS:', JSON.stringify(response.data));
+
+    res.json({
+      success: true,
+      response: response.data
+    });
+
+  } catch (error) {
+    console.error('========== NVIDIA TEST ERROR ==========');
+    console.error('STATUS:', error.response?.status);
+    console.error('STATUS TEXT:', error.response?.statusText);
+    console.error('NVIDIA RESPONSE:', JSON.stringify(error.response?.data));
+    console.error('ERROR:', error.message);
+    console.error('========================================');
+
+    res.status(error.response?.status || 500).json({
+      success: false,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      nvidiaResponse: error.response?.data,
+      error: error.message
+    });
+  }
+});
 // List models endpoint (OpenAI compatible)
 app.get('/v1/models', (req, res) => {
   const models = Object.keys(MODEL_MAPPING).map(model => ({
