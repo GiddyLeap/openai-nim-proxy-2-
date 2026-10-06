@@ -22,7 +22,7 @@ const ENABLE_THINKING_MODE = true; // Set to true to enable chat_template_kwargs
 
 // Model mapping (adjust based on available NIM models)
 const MODEL_MAPPING = {
-  'glm-5.3-flash': 'zai-org/glm-5.3-flash'
+  'glm-5.3-flash': 'z-ai/glm-5-3-flash'
 };
 
 // Health check endpoint
@@ -90,6 +90,7 @@ app.post('/v1/chat/completions', async (req, res) => {
       model: nimModel,
       messages: messages,
       temperature: temperature ?? 0.5,
+      top_p: top_p ?? 1,
       max_tokens: max_tokens ?? 1024,
       reasoning_effort: "low",
       stream: stream ?? false
