@@ -93,7 +93,7 @@ app.post('/v1/chat/completions', async (req, res) => {
       top_p: top_p ?? 1,
       max_tokens: max_tokens ?? 1024,
       reasoning_effort: "low",
-      stream: stream ?? false
+      stream: false
     };
     
     // Make request to NVIDIA NIM API
