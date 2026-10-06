@@ -210,17 +210,20 @@ app.post('/v1/chat/completions', async (req, res) => {
     
   } catch (error) {
   console.error('========== PROXY ERROR ==========');
-  console.error('Status:', error.response?.status);
-  console.error('NVIDIA response:', error.response?.data);
-  console.error('Error message:', error.message);
+  console.error('STATUS:', error.response?.status);
+  console.error('STATUS TEXT:', error.response?.statusText);
+  console.error('NVIDIA RESPONSE:', JSON.stringify(error.response?.data));
+  console.error('REQUEST URL:', error.config?.url);
+  console.error('ERROR MESSAGE:', error.message);
   console.error('=================================');
 
   res.status(error.response?.status || 500).json({
     error: {
-      message: error.response?.data?.detail ||
-               error.response?.data?.message ||
-               error.message ||
-               'Internal server error',
+      message:
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        error.message ||
+        'Internal server error',
       type: 'invalid_request_error',
       code: error.response?.status || 500
     }
