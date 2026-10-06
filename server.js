@@ -53,6 +53,11 @@ app.get('/v1/models', (req, res) => {
 // Chat completions endpoint (main proxy)
 app.post('/v1/chat/completions', async (req, res) => {
   try {
+    console.log('========== INCOMING CHAT REQUEST ==========');
+    console.log('Model:', req.body.model);
+    console.log('Messages:', req.body.messages?.length);
+    console.log('Stream requested:', req.body.stream);
+    console.log('============================================');
     const { model, messages, temperature, top_p, max_tokens, stream } = req.body;
     
     // Smart model selection with fallback
@@ -95,7 +100,12 @@ app.post('/v1/chat/completions', async (req, res) => {
       reasoning_effort: "low",
       stream: false
     };
-    
+
+    console.log('========== NVIDIA REQUEST ==========');
+    console.log('NVIDIA MODEL:', nimModel);
+    console.log('NVIDIA STREAM:', nimRequest.stream);
+    console.log('NVIDIA MESSAGE COUNT:', nimRequest.messages?.length);
+    console.log('====================================');
     // Make request to NVIDIA NIM API
     const response = await axios.post(`${NIM_API_BASE}/chat/completions`, nimRequest, {
       headers: {
