@@ -39,7 +39,7 @@ app.get('/test-nvidia', async (req, res) => {
     const response = await axios.post(
       `${NIM_API_BASE}/chat/completions`,
       {
-        model: 'z-ai/glm-5.3-flash'
+        model: 'z-ai/glm-5.3-flash',
         messages: [
           {
             role: 'user',
