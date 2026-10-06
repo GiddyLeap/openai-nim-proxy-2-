@@ -22,7 +22,7 @@ const ENABLE_THINKING_MODE = true; // Set to true to enable chat_template_kwargs
 
 // Model mapping (adjust based on available NIM models)
 const MODEL_MAPPING = {
-  'glm-5.3-flash': 'z-ai/glm-5-3-flash'
+  'glm-5.3-flash': 'z-ai/glm-5.3-flash''
 };
 
 // Health check endpoint
@@ -39,7 +39,7 @@ app.get('/test-nvidia', async (req, res) => {
     const response = await axios.post(
       `${NIM_API_BASE}/chat/completions`,
       {
-        model: 'z-ai/glm-5-3-flash',
+        model: 'z-ai/glm-5.3-flash'
         messages: [
           {
             role: 'user',
