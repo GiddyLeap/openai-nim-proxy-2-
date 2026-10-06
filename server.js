@@ -53,7 +53,7 @@ app.get('/v1/models', (req, res) => {
 // Chat completions endpoint (main proxy)
 app.post('/v1/chat/completions', async (req, res) => {
   try {
-    const { model, messages, temperature, max_tokens, stream } = req.body;
+    const { model, messages, temperature, top_p, max_tokens, stream } = req.body;
     
     // Smart model selection with fallback
     let nimModel = MODEL_MAPPING[model];
