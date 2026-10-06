@@ -22,7 +22,7 @@ const ENABLE_THINKING_MODE = true; // Set to true to enable chat_template_kwargs
 
 // Model mapping (adjust based on available NIM models)
 const MODEL_MAPPING = {
-  'glm-5.3-flash': 'z-ai/glm-5.3-flash'
+  'glm-5.3-flash': 'zai-org/glm-5.3-flash'
 };
 
 // Health check endpoint
@@ -91,7 +91,7 @@ app.post('/v1/chat/completions', async (req, res) => {
       messages: messages,
       temperature: temperature ?? 0.5,
       max_tokens: max_tokens ?? 1024,
-      extra_body: ENABLE_THINKING_MODE ? { chat_template_kwargs: { thinking: true } } : undefined,
+      reasoning_effort: "low",
       stream: stream ?? false
     };
     
