@@ -144,7 +144,7 @@ app.post('/v1/chat/completions', async (req, res) => {
       temperature: temperature ?? 0.5,
       top_p: top_p ?? 1,
       max_tokens: max_tokens ?? 1024,
-      reasoning_effort: "low",
+      reasoning_effort: "high",
       stream: true
     };
 
