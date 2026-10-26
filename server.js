@@ -69,7 +69,12 @@ app.get('/test-nvidia', async (req, res) => {
     console.error('========== NVIDIA TEST ERROR ==========');
     console.error('STATUS:', error.response?.status);
     console.error('STATUS TEXT:', error.response?.statusText);
-    console.error('NVIDIA RESPONSE:', JSON.stringify(error.response?.data));
+    console.error(
+  'NVIDIA RESPONSE:',
+  typeof error.response?.data === 'string'
+    ? error.response.data
+    : '[stream or non-JSON response]'
+);
     console.error('ERROR:', error.message);
     console.error('========================================');
 
