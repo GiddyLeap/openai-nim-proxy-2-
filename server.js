@@ -273,7 +273,12 @@ app.post('/v1/chat/completions', async (req, res) => {
   console.error('========== PROXY ERROR ==========');
   console.error('STATUS:', error.response?.status);
   console.error('STATUS TEXT:', error.response?.statusText);
-  console.error('NVIDIA RESPONSE:', JSON.stringify(error.response?.data));
+  console.error(
+  'NVIDIA RESPONSE:',
+  typeof error.response?.data === 'string'
+    ? error.response.data
+    : '[stream or non-JSON response]'
+);
   console.error('REQUEST URL:', error.config?.url);
   console.error('ERROR MESSAGE:', error.message);
   console.error('=================================');
